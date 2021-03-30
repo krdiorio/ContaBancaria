@@ -96,19 +96,9 @@ namespace ContaBancaria
         /// </summary>
         private static void ExcluirConta()
         {
-            LimparTela();
+            ListarContas();
 
-            if (listaContasCorrentes.Count == 0)
-            {
-                LimparTela();
-                Console.WriteLine("Nenhuma conta cadastrada !!!");
-                Console.WriteLine();
-                Console.WriteLine("Pressione <ENTER> voltar ao Menu principal ...");
-                Console.ReadLine();
-                LimparTela();
-                return;
-            }
-            else
+            if (listaContasCorrentes.Count() > 0)
             {
                 ListarContas();
                 Console.WriteLine();
@@ -136,8 +126,13 @@ namespace ContaBancaria
 
                     }
                 }
-
             }
+            else
+            {
+                return;
+            }
+
+            //}
 
             Console.WriteLine();
             Console.Write("Pressione <ENTER> tecla para voltar ao menu ...");
@@ -153,14 +148,22 @@ namespace ContaBancaria
         private static void EfetuarDeposito()
         {
             ListarContas();
-            Console.WriteLine();
-            Console.Write("Digite o Id da conta: ");
-            int indiceConta = int.Parse(Console.ReadLine());
 
-            Console.Write("Digite o valor a ser depositado: ");
-            double valorDeposito = double.Parse(Console.ReadLine());
+            if (listaContasCorrentes.Count() > 0)
+            {
+                Console.WriteLine();
+                Console.Write("Digite o Id da conta: ");
+                int indiceConta = int.Parse(Console.ReadLine());
 
-            listaContasCorrentes[indiceConta].EfetuarDeposito(valorDeposito);
+                Console.Write("Digite o valor a ser depositado: ");
+                double valorDeposito = double.Parse(Console.ReadLine());
+
+                listaContasCorrentes[indiceConta].EfetuarDeposito(valorDeposito);
+            }
+            else
+            {
+                return;
+            }
 
         }
 
@@ -170,14 +173,21 @@ namespace ContaBancaria
         private static void EfetuarSaque()
         {
             ListarContas();
-            Console.WriteLine();
-            Console.Write("Digite o Id da conta corrente: ");
-            int indiceConta = int.Parse(Console.ReadLine());
+            if (listaContasCorrentes.Count() > 0)
+            {
+                Console.WriteLine();
+                Console.Write("Digite o Id da conta corrente: ");
+                int indiceConta = int.Parse(Console.ReadLine());
 
-            Console.Write("Digite o valor do saque: ");
-            double valorSaque = double.Parse(Console.ReadLine());
+                Console.Write("Digite o valor do saque: ");
+                double valorSaque = double.Parse(Console.ReadLine());
 
-            listaContasCorrentes[indiceConta].EfetuarSaque(valorSaque);
+                listaContasCorrentes[indiceConta].EfetuarSaque(valorSaque);
+            }
+            else
+            {
+                return;
+            }
         }
 
         /// <summary>
@@ -185,16 +195,25 @@ namespace ContaBancaria
         /// </summary>
         private static void EfetuarTransferencia()
         {
-            Console.Write("Digite o número da conta de origem: ");
-            int indiceContaOrigem = int.Parse(Console.ReadLine());
+            ListarContas();
 
-            Console.Write("Digite o número da conta de destino: ");
-            int indiceContaDestino = int.Parse(Console.ReadLine());
+            if (listaContasCorrentes.Count() > 0)
+            {
+                Console.Write("Digite o Id da conta de origem: ");
+                int indiceContaOrigem = int.Parse(Console.ReadLine());
 
-            Console.Write("Digite o valor a ser transferido: ");
-            double valorTransferencia = double.Parse(Console.ReadLine());
+                Console.Write("Digite o Id da conta de destino: ");
+                int indiceContaDestino = int.Parse(Console.ReadLine());
 
-            listaContasCorrentes[indiceContaOrigem].EfetuarTransferencia(valorTransferencia, listaContasCorrentes[indiceContaDestino]);
+                Console.Write("Digite o valor a ser transferido: ");
+                double valorTransferencia = double.Parse(Console.ReadLine());
+
+                listaContasCorrentes[indiceContaOrigem].EfetuarTransferencia(valorTransferencia, listaContasCorrentes[indiceContaDestino]);
+            }
+            else
+            {
+                return;
+            }
         }
 
         /// <summary>
@@ -261,7 +280,6 @@ namespace ContaBancaria
             string opcaoUsuario = Console.ReadLine().ToUpper();
             return opcaoUsuario;
         }
-
 
     }
 }
