@@ -51,7 +51,7 @@ namespace ContaBancaria.Entities
                 var valorAddLimiteChequeEspecial = LimiteChequeEspecialConcedido - LimiteChequeEspecial;
                 LimiteChequeEspecial += valorAddLimiteChequeEspecial;
                 valorDeposito -= valorAddLimiteChequeEspecial;
-                if (valorDeposito==0)
+                if (valorDeposito == 0)
                 {
                     Saldo = 0;
                 }
@@ -145,9 +145,11 @@ namespace ContaBancaria.Entities
         /// <param name="contaDestino"></param>
         public void EfetuarTransferencia(double valorTransferencia, ContaCorrente contaDestino)
         {
-            if (EfetuarSaque(valorTransferencia))
             {
-                contaDestino.EfetuarDeposito(valorTransferencia);
+                if (EfetuarSaque(valorTransferencia))
+                {
+                    contaDestino.EfetuarDeposito(valorTransferencia);
+                }
             }
         }
 
