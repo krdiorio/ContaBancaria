@@ -65,29 +65,39 @@ namespace ContaBancaria
             Console.Write("Digite (1) Pessoa Fisica - (2) Pessoa Juridica: ");
             var tipoConta = int.Parse(Console.ReadLine());
 
-            Console.Write("Digite o Nome do Cliente: ");
-            var nomeCorrentista = Console.ReadLine();
+            if (tipoConta == 1 || tipoConta == 2)
+            {
+                Console.Write("Digite o Nome do Cliente: ");
+                var nomeCorrentista = Console.ReadLine();
 
-            Console.Write("Digite o Saldo inicial: ");
-            var saldoIncial = double.Parse(Console.ReadLine());
+                Console.Write("Digite o Saldo inicial: ");
+                var saldoIncial = double.Parse(Console.ReadLine());
 
-            Console.Write("Digite o Limete crédito especial: ");
-            var limiteCredito = double.Parse(Console.ReadLine());
+                Console.Write("Digite o Limete crédito especial: ");
+                var limiteCredito = double.Parse(Console.ReadLine());
 
-            // Gerar radomicamente numero da agencia e conta corrente
-            var numAleatorio = new Random();
-            var agenciaConta = numAleatorio.Next(1, 5);
-            var contaCorrente = numAleatorio.Next(1, 21);
-            Console.WriteLine($"Número da Agencia: {agenciaConta}");
-            Console.WriteLine($"Número da Conta corrente: {contaCorrente}");
+                // Gerar radomicamente numero da agencia e conta corrente
+                var numAleatorio = new Random();
+                var agenciaConta = numAleatorio.Next(1, 5);
+                var contaCorrente = numAleatorio.Next(1, 21);
+                Console.WriteLine($"Número da Agencia: {agenciaConta}");
+                Console.WriteLine($"Número da Conta corrente: {contaCorrente}");
 
-            //Instancia nova conta corrente
-            var novaConta = new ContaCorrente((TipoConta)tipoConta, nomeCorrentista, agenciaConta, contaCorrente, limiteCredito, saldoIncial);
+                //Instancia nova conta corrente
+                var novaConta = new ContaCorrente((TipoConta)tipoConta, nomeCorrentista, agenciaConta, contaCorrente, limiteCredito, saldoIncial);
 
-            listaContasCorrentes.Add(novaConta);
-            Console.WriteLine();
-            Console.Write("Conta cadastra com sucesso, pressione <ENTER>para voltar ao menu ...");
-            Console.ReadLine();
+                listaContasCorrentes.Add(novaConta);
+                Console.WriteLine();
+                Console.Write("Conta cadastra com sucesso, pressione <ENTER>para voltar ao menu ...");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.Write("Opção inválida, pressione <ENTER>para voltar ao menu ...");
+                Console.ReadLine();
+                return;
+            }
 
         }
 
